@@ -20,8 +20,52 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
+    height: 4rem;
     padding: 2rem;
+}
+
+.left-navbar, 
+.right-navbar { 
+    display: flex;
+    height: inherit;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-navbar {
+    flex: 1;
+}
+
+.right-navbar {
+    flex: 2;
+}
+
+.search-area {
+    display: flex;
+    align-items: center;
+}
+
+.right-navbar .search-area {
+    padding: 10px 20px;
+}
+
+.right-navbar .search-area input {
+    height: 1.8rem;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    background-color: rgb(208, 208, 208);
+    padding-left: 12px;
+    padding-right: 30px;
+    font-size: 16px;
+}
+
+.right-navbar .search-area i {
+    font-size: 1.3rem;
+    text-align: center;
+    margin-left: -30px;
+    z-index: 1;
+    cursor: pointer;
 }
 
 .container {
@@ -94,12 +138,33 @@ tbody tr td:nth-child(3){
     text-align: center;
 }
 
-.actions .bx .bx-edit{
+.active {
+    font-weight: 600;
     color: tomato;
 }
 
 @media (max-width: 650px) {
     .inactive {
         display: none;
+    }
+}
+
+@media (max-width: 425px) {
+    .right-navbar {
+        flex: 1;
+    }
+
+    .right-navbar .search-area input {
+        max-width: 150px;
+        padding-right: 10px;
+    }
+
+    .table-area {
+        padding: 1rem;
+    }
+
+    .title-list {
+        font-size: .8rem;
+        text-align: center;
     }
 }

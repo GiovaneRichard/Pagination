@@ -4,16 +4,20 @@
  * 1º - Calcular a quantidade total de páginas.
  * 2º - Definir a pagina ($pagina)
  * 3º - fazer a query com LIMIT
+ *  - max-links - qtd de links mostrados antes e depois
  */
 
-    $item_per_pag = 10;
+    $maximo = 10;
     $pagina = 0;
     $deslocamento;
+    $max_links = 2; 
 
-    $deslocamento = (isset($_GET['pagina']) && !empty($_GET['pagina']) ) ? $_GET['pagina'] : 1;
+    $pagina = (isset($_GET['pagina']) && !empty($_GET['pagina']) ) ? $_GET['pagina'] : 0;
+    // $deslocamento = (isset($_GET['pagina']) && !empty($_GET['pagina']) ) ? $_GET['pagina'] : 1;
 
-    $pagina = ( ($deslocamento- 1) * $item_per_pag);
+    // $pagina = ( ($deslocamento- 1) * $maximo);
 
+       
 
     // calculando a qtd de registros no db
     $total = 0;
@@ -21,12 +25,13 @@
     $data = $sql->fetch();
     $total = $data['total'];
 
-    $paginas = ceil($total / $item_per_pag);
-
-    $sql = $pdo->query("SELECT * FROM movies LIMIT $pagina, $item_per_pag");
+    
+    $total_paginas = ceil($total / $maximo);
+    
+    $sql = $pdo->query("SELECT * FROM movies LIMIT $pagina, $maximo");
     $res = $sql->fetchAll(PDO::FETCH_ASSOC);
-   
-    $k=1;
+    
+  
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +54,10 @@
                 LOGO
             </div>
             <div class="right-navbar">
-                SEARCH ÁREA
+                <div class="search-area">
+                    <input type="text" />
+                    <i class='bx bx-search-alt-2' ></i>
+                </div>
             </div>
         </div>    
     </nav>
@@ -69,7 +77,11 @@
                     <?php foreach($res as $item): ?>
                     <tr>
                         <td class="inactive"><?=$item['id'];?></td>
-                        <td><?=$item['title'];?></td>
+                        <td>
+                        <div class="title-list">
+                            <?=$item['title'];?>
+                        </div>
+                        </td>
                         <td>
                             <div class="actions">
                                 <a href="#"><i class='bx bx-edit'></i></a>
@@ -82,11 +94,42 @@
                 </tbody>
             </table>
         </div>
+
+
         <div class="pagination">
             <div class="pag-area">
-                <?php for($i = 0; $i < $paginas; ++$i): ?>
-                    <a href="./?pagina=<?=$i+1?>"><?=$i+1?></a>
+            <?php if($total > $maximo): ?>
+
+                <a href="./?pagina=0">Primeira</a>
+                
+                
+                <?php for($i = $pagina - $max_links; $i <= $pagina - 1; $i++): ?>
+               
+                    <?php if($i >= 1): ?>
+                        <a href="./?pagina=<?=$i;?>"><?=$i;?></a>
+                    <?php endif ?>
+
                 <?php endfor ?>
+
+                <span class="active"><?=$pagina;?></span>
+
+                
+                <?php for($i = $pagina + 1; $i <= $pagina + $max_links; ++$i): ?>
+                    
+                    <?php if($i <= $total_paginas): ?>
+                        <a href="./?pagina=<?=$i;?>"><?=$i;?></a>
+                    <?php endif ?>
+
+                <?php endfor ?>
+
+                <a href="./?pagina=<?=$total_paginas;?>">Ultima</a>
+            <?php endif?>
+
+
+
+                
+
+
             </div>
         </div>
     </div>
