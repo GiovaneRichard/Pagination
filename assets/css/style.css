@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@400;500;600;700&family=Poppins:wght@200;300;400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+nav {
+    height: 4rem;
+    box-shadow: 0 4px 20px rgba(0 0 0 / 20%);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 1140px;
+    margin: auto;
+}
+
+.container h1 {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.table-area {
+    width: 100%;
+    padding: 2rem;
+}
+
+table {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    overflow: hidden;
+    
+}
+
+
+thead tr th{
+    background-color: #8bd4dd;
+    padding: 1rem;
+    
+}
+
+tbody tr td{
+    padding: .5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr td:nth-child(3){
+    background-color: rgb(221, 218, 218);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pag-area {
+    padding: 10px;
+}
+
+.pag-area a {
+    padding: 5px;
+    margin: 0 3px;
+    text-decoration: none;
+    font-weight: 500;
+
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+}
+
+.actions a {
+   text-decoration: none;
+   margin: auto;
+}
+
+.actions .bx {
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.actions .bx .bx-edit{
+    color: tomato;
+}
+
+@media (max-width: 650px) {
+    .inactive {
+        display: none;
+    }
+}
